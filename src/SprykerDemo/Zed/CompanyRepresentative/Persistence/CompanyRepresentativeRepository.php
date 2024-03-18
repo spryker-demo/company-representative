@@ -26,14 +26,15 @@ class CompanyRepresentativeRepository extends AbstractRepository implements Comp
      */
     public function findCompanyRepresentatives(CompanyRepresentativesFilterTransfer $companyRepresentativesFilterTransfer): CompanyRepresentativesTransfer
     {
-        $CompanyRepresentativesCollection = $this->getFactory()
+        /** @var \Propel\Runtime\Collection\ObjectCollection $companyRepresentativesCollection */
+        $companyRepresentativesCollection = $this->getFactory()
             ->createCompanyRepresentativeQuery()
             ->filterByFkCompany($companyRepresentativesFilterTransfer->getCompanyId())
             ->useUserQuery()
             ->endUse()
             ->find();
 
-        return $this->mapCompanyRepresentativesCollectionToTransfer($CompanyRepresentativesCollection, $companyRepresentativesFilterTransfer->getCompanyId());
+        return $this->mapCompanyRepresentativesCollectionToTransfer($companyRepresentativesCollection, $companyRepresentativesFilterTransfer->getCompanyId());
     }
 
     /**
