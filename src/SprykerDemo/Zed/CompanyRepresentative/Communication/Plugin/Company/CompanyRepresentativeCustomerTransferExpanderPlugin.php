@@ -29,7 +29,9 @@ class CompanyRepresentativeCustomerTransferExpanderPlugin extends AbstractPlugin
      */
     public function expandTransfer(CustomerTransfer $customerTransfer): CustomerTransfer
     {
-        if (!$customerTransfer->getCompanyUserTransfer()) {
+        $companyUserTransfer = $customerTransfer->getCompanyUserTransfer();
+
+        if (!$companyUserTransfer || !$companyUserTransfer->getCompany()) {
             return $customerTransfer;
         }
 
